@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mv-objects-dev-service
+  namespace: wrld3d
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mv-objects-dev-service
+  template:
+    metadata:
+      labels:
+        app: mv-objects-dev-service
+    spec:
+      containers:
+        - name: mv-objects-dev-service
+          image: <IMAGE>
+          envFrom:
+            - configMapRef:
+                name: mv-objects-dev-config
+          ports:
+            - containerPort: 8101
